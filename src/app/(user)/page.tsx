@@ -12,6 +12,8 @@ export const metadata = {
   description: "Temukan motor impianmu di MotoMart. Marketplace motor baru dan bekas terpercaya dengan harga terbaik di Indonesia.",
 };
 
+export const dynamic = 'force-dynamic';
+
 const BRAND_LIST = [
   { name: "Honda", color: "from-red-500 to-red-600" },
   { name: "Yamaha", color: "from-blue-500 to-blue-600" },
