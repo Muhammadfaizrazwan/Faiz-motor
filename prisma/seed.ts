@@ -1,15 +1,13 @@
 import { PrismaClient } from "@prisma/client/index";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 import bcrypt from "bcryptjs";
 
-const adapter = new PrismaMariaDb({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "faiz_motor",
-  port: Number(process.env.DB_PORT) || 3306,
-  connectionLimit: 5,
+const pool = new Pool({
+  connectionString: process.env.DATABASE_POOL_URL || "postgresql://postgres.awspyoqeurfwhhxgmspk:faizganteng01@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true",
+  ssl: { rejectUnauthorized: false }
 });
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
