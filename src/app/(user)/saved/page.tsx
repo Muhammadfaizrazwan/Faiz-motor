@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { formatRupiah } from "@/lib/format";
 import {
-  ShoppingCart,
+  Heart,
   Trash2,
   ExternalLink,
   AlertTriangle,
@@ -78,8 +78,8 @@ export default function SavedPage() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-1">
-          <ShoppingCart className="w-6 h-6 text-[#E8390E]" />
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1628]">Keranjang Saya</h1>
+          <Heart className="w-6 h-6 text-[#E8390E]" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1628]">Motor Tersimpan</h1>
         </div>
         <p className="text-sm text-[#64748B]">
           {savedMotors.length > 0
@@ -91,7 +91,7 @@ export default function SavedPage() {
       {savedMotors.length === 0 ? (
         <EmptyState
           icon={Bike}
-          title="Keranjang Kosong"
+          title="Belum Ada Motor Tersimpan"
           description="Anda belum menyimpan motor apapun. Mulai jelajahi motor yang tersedia."
           actionLabel="Cari Motor"
           actionHref="/motors"

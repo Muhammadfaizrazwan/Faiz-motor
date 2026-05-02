@@ -29,8 +29,7 @@ export function useUserReviews(motorId: string) {
       setSubmitting(true);
       try {
         await api.post(`/motors/${motorId}/reviews`, data);
-        toast.success("Ulasan berhasil dikirim! Menunggu persetujuan admin.");
-        // Refresh reviews after submission
+        toast.success("Ulasan berhasil dikirim! Terima kasih atas ulasan Anda.");
         await fetchReviews();
         return true;
       } catch (error: any) {
@@ -45,6 +44,39 @@ export function useUserReviews(motorId: string) {
     [motorId, fetchReviews]
   );
 
+  const deleteReview = useCallback(
+    async (reviewId: string) => {
+      try {
+        await api.delete(`/reviews/${reviewId}`);
+        toast.success("Ulasan berhasil dihapus");
+        await fetchReviews();
+        return true;
+      } catch (error) {
+        toast.error("Gagal menghapus ulasan");
+        return false;
+      }
+    },
+    [fetchReviews]
+  );
+
+  const editReview = useCallback(
+    async (reviewId: string, data: { rating: number; comment: string }) => {
+      setSubmitting(true);
+      try {
+        await api.put(`/reviews/${reviewId}`, data);
+        toast.success("Ulasan berhasil diperbarui");
+        await fetchReviews();
+        return true;
+      } catch (error) {
+        toast.error("Gagal memperbarui ulasan");
+        return false;
+      } finally {
+        setSubmitting(false);
+      }
+    },
+    [fetchReviews]
+  );
+
   return {
     reviews: reviewData?.reviews || [],
     averageRating: reviewData?.averageRating || 0,
@@ -53,5 +85,7 @@ export function useUserReviews(motorId: string) {
     submitting,
     fetchReviews,
     submitReview,
+    deleteReview,
+    editReview,
   };
 }

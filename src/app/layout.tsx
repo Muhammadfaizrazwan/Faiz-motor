@@ -10,11 +10,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "MotoMart — Marketplace Motor Terpercaya",
-    template: "%s | MotoMart",
+    default: "Faiz Motor — Marketplace Motor Terpercaya",
+    template: "%s | Faiz Motor",
   },
   description:
-    "Temukan motor impianmu di MotoMart. Marketplace motor baru dan bekas terpercaya dengan harga terbaik di Indonesia.",
+    "Temukan motor impianmu di Faiz Motor. Marketplace motor baru dan bekas terpercaya dengan harga terbaik di Indonesia.",
 };
 
 export default function RootLayout({

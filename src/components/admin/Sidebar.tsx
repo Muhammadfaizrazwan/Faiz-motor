@@ -10,13 +10,13 @@ import {
   Users,
   LogOut,
   Settings,
+  Globe,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/motors", label: "Motor", icon: Bike },
-  { href: "/admin/orders", label: "Pesanan", icon: ShoppingCart },
   { href: "/admin/reviews", label: "Ulasan", icon: Star },
   { href: "/admin/users", label: "Users", icon: Users },
 ];
@@ -39,7 +39,7 @@ export function Sidebar() {
           </div>
           <div>
             <h1 className="text-white font-bold text-lg leading-none">
-              MotoMart
+              Faiz Motor
             </h1>
             <p className="text-slate-400 text-[11px] mt-0.5">Admin Panel</p>
           </div>
@@ -77,6 +77,14 @@ export function Sidebar() {
         >
           <Settings className="w-5 h-5 text-slate-500" />
           Pengaturan
+        </Link>
+        <Link
+          href="/"
+          target="_blank"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
+        >
+          <Globe className="w-5 h-5 text-slate-500" />
+          Lihat Halaman User
         </Link>
         <button
           onClick={() => signOut({ callbackUrl: "/login" })}

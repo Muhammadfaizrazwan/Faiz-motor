@@ -3,8 +3,8 @@ import { auth } from "@/lib/auth";
 import { AdminShell } from "@/components/admin/AdminShell";
 
 export const metadata = {
-  title: "MotoMart Admin",
-  description: "Admin panel for MotoMart motorcycle marketplace",
+  title: "Faiz Motor Admin",
+  description: "Admin panel for Faiz Motor motorcycle marketplace",
 };
 
 export default async function AdminLayout({

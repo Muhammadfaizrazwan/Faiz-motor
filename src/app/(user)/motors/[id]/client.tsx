@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { PhotoGallery } from "@/components/user/PhotoGallery";
 import { SaveButton } from "@/components/user/SaveButton";
@@ -28,7 +28,7 @@ export function MotorDetailClient({ motor, section }: Props) {
       <div className="flex flex-col sm:flex-row gap-3">
         <SaveButton motorId={motor.id} variant="full" />
         <a
-          href={`https://wa.me/6281234567890?text=Halo%20MotoMart%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(motor.name)}`}
+          href={`https://wa.me/6282125428638?text=Halo%20Faiz%20Motor%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(motor.name)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1"
@@ -47,11 +47,35 @@ export function MotorDetailClient({ motor, section }: Props) {
 }
 
 function TabsSection({ motor, isLoggedIn }: { motor: Motor; isLoggedIn: boolean }) {
-  const { reviews, averageRating, totalReviews, loading, submitting, fetchReviews, submitReview } = useUserReviews(motor.id);
+  const { data: session } = useSession();
+  const { reviews, averageRating, totalReviews, loading, submitting, fetchReviews, submitReview, editReview, deleteReview } = useUserReviews(motor.id);
+  const [editingReviewId, setEditingReviewId] = useState<string | null>(null);
+  const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchReviews();
   }, [fetchReviews]);
+
+  const handleEditSubmit = async (data: { rating: number; comment: string }) => {
+    if (editingReviewId) {
+      const success = await editReview(editingReviewId, data);
+      if (success) {
+        setEditingReviewId(null);
+      }
+      return success;
+    }
+    return submitReview(data);
+  };
+
+  const handleDelete = async (id: string) => {
+    setIsDeletingId(id);
+    await deleteReview(id);
+    setIsDeletingId(null);
+  };
+
+  const editingReview = reviews.find((r) => r.id === editingReviewId);
+  const currentUserId = session?.user?.id;
+  const userHasReview = reviews.some(r => r.userId === currentUserId);
 
   return (
     <div className="space-y-8">
@@ -76,8 +100,16 @@ function TabsSection({ motor, isLoggedIn }: { motor: Motor; isLoggedIn: boolean 
           )}
         </div>
 
-        {/* Review Form */}
-        <ReviewForm onSubmit={submitReview} isLoggedIn={isLoggedIn} submitting={submitting} />
+        {/* Review Form - Show if editing OR if user hasn't reviewed yet OR not logged in */}
+        {(!userHasReview || editingReviewId || !isLoggedIn) && (
+          <ReviewForm 
+            onSubmit={handleEditSubmit} 
+            isLoggedIn={isLoggedIn} 
+            submitting={submitting} 
+            initialData={editingReview}
+            onCancel={() => setEditingReviewId(null)}
+          />
+        )}
 
         {/* Review List */}
         {loading ? (
@@ -98,7 +130,14 @@ function TabsSection({ motor, isLoggedIn }: { motor: Motor; isLoggedIn: boolean 
         ) : reviews.length > 0 ? (
           <div className="space-y-3">
             {reviews.map((review) => (
-              <ReviewCard key={review.id} review={review} />
+              <ReviewCard 
+                key={review.id} 
+                review={review} 
+                currentUserId={currentUserId}
+                onEdit={(r) => setEditingReviewId(r.id)}
+                onDelete={handleDelete}
+                isDeleting={isDeletingId === review.id}
+              />
             ))}
           </div>
         ) : (

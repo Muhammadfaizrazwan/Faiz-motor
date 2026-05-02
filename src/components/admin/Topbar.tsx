@@ -9,7 +9,6 @@ const pageTitles: Record<string, string> = {
   "/admin": "Dashboard",
   "/admin/motors": "Manajemen Motor",
   "/admin/motors/add": "Tambah Motor",
-  "/admin/orders": "Pesanan & Keranjang",
   "/admin/reviews": "Moderasi Ulasan",
   "/admin/users": "Manajemen User",
 };

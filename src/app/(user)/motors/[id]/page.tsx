@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!motor) return { title: "Motor Tidak Ditemukan" };
   return {
     title: `${motor.name} — ${motor.brand}`,
-    description: `Beli ${motor.name} ${motor.brand} dengan harga ${formatRupiah(motor.price)} di MotoMart`,
+    description: `Beli ${motor.name} ${motor.brand} dengan harga ${formatRupiah(motor.price)} di Faiz Motor`,
   };
 }
 
@@ -38,9 +38,9 @@ export default async function MotorDetailPage({ params }: Props) {
   const motorData = JSON.parse(JSON.stringify(motor));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-10">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-[#64748B] mb-6">
+      <nav className="flex items-center gap-2 text-xs text-[#64748B] mb-4 sm:mb-6 overflow-x-auto whitespace-nowrap">
         <a href="/" className="hover:text-[#E8390E] transition-colors">Beranda</a>
         <span>/</span>
         <a href="/motors" className="hover:text-[#E8390E] transition-colors">Motor</a>
@@ -48,16 +48,16 @@ export default async function MotorDetailPage({ params }: Props) {
         <span className="text-[#0A1628] font-medium truncate">{motor.name}</span>
       </nav>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
         {/* Left: Photo Gallery (rendered in client component) */}
         <div>
           <MotorDetailClient motor={motorData} section="gallery" />
         </div>
 
         {/* Right: Motor Info */}
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Brand & Status */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
             <span className="text-xs font-bold uppercase tracking-wider text-[#E8390E] bg-[#E8390E]/8 px-3 py-1 rounded-full">
               {motor.brand}
             </span>
@@ -71,16 +71,16 @@ export default async function MotorDetailPage({ params }: Props) {
           </div>
 
           {/* Name */}
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0A1628] leading-tight">{motor.name}</h1>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#0A1628] leading-tight">{motor.name}</h1>
 
           {/* Price */}
-          <div className="bg-gradient-to-r from-[#0A1628] to-[#1E3A5F] rounded-2xl p-5">
-            <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">Harga</p>
-            <p className="text-3xl font-extrabold text-white">{formatRupiah(motor.price)}</p>
+          <div className="bg-gradient-to-r from-[#0A1628] to-[#1E3A5F] rounded-xl sm:rounded-2xl p-4 sm:p-5">
+            <p className="text-[10px] sm:text-xs text-slate-400 uppercase tracking-wider mb-1">Harga</p>
+            <p className="text-2xl sm:text-3xl font-extrabold text-white">{formatRupiah(motor.price)}</p>
           </div>
 
           {/* Specs Grid */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-3">
             {[
               { icon: Calendar, label: "Tahun", value: motor.year },
               { icon: Palette, label: "Warna", value: motor.color },
@@ -88,12 +88,12 @@ export default async function MotorDetailPage({ params }: Props) {
               { icon: Eye, label: "Dilihat", value: `${motor.viewCount}x` },
               { icon: Tag, label: "Ditambahkan", value: formatDate(motor.createdAt) },
             ].map((spec) => (
-              <div key={spec.label} className="bg-slate-50 rounded-xl p-3.5 border border-slate-100">
-                <div className="flex items-center gap-2 mb-1">
-                  <spec.icon className="w-3.5 h-3.5 text-[#64748B]" />
-                  <span className="text-[11px] text-[#64748B] uppercase tracking-wider font-medium">{spec.label}</span>
+              <div key={spec.label} className="bg-slate-50 rounded-lg sm:rounded-xl p-2.5 sm:p-3.5 border border-slate-100">
+                <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                  <spec.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#64748B]" />
+                  <span className="text-[10px] sm:text-[11px] text-[#64748B] uppercase tracking-wider font-medium">{spec.label}</span>
                 </div>
-                <p className="text-sm font-semibold text-[#0A1628]">{spec.value}</p>
+                <p className="text-xs sm:text-sm font-semibold text-[#0A1628]">{spec.value}</p>
               </div>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default async function MotorDetailPage({ params }: Props) {
       </div>
 
       {/* Description & Reviews */}
-      <div className="mt-10">
+      <div className="mt-6 sm:mt-10">
         <MotorDetailClient motor={motorData} section="tabs" />
       </div>
     </div>

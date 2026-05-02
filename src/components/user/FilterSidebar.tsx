@@ -63,15 +63,6 @@ export function FilterSidebar({ filters, onFilterChange, onReset, onClose, isMob
       </div>
 
       <div className="space-y-2.5">
-        <Label className="text-xs font-semibold text-[#0A1628] uppercase tracking-wider">Status</Label>
-        <div className="flex gap-2 flex-wrap">
-          {[{ value: "", label: "Semua" }, { value: "TERSEDIA", label: "Tersedia" }, { value: "DIPESAN", label: "Dipesan" }, { value: "TERJUAL", label: "Terjual" }].map((opt) => (
-            <button key={opt.value} onClick={() => onFilterChange("status", opt.value)} className={`py-1.5 px-3 text-xs font-medium rounded-full border transition-all ${filters.status === opt.value ? "bg-[#0A1628] text-white border-[#0A1628]" : "bg-white text-[#64748B] border-slate-200"}`}>{opt.label}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="space-y-2.5">
         <Label className="text-xs font-semibold text-[#0A1628] uppercase tracking-wider">Range Harga</Label>
         <div className="grid grid-cols-2 gap-2">
           <Input type="number" placeholder="Min" value={filters.minPrice} onChange={(e) => onFilterChange("minPrice", e.target.value)} className="h-9 text-xs" />

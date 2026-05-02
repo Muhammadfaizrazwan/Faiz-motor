@@ -52,18 +52,18 @@ export function MotorCard({ motor }: MotorCardProps) {
           )}
 
           {/* Status Badge */}
-          <div className="absolute top-3 right-3">
+          <div className="absolute top-2 right-2 sm:top-3 sm:right-3">
             <span
-              className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm ${status.className}`}
+              className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-sm ${status.className}`}
             >
               {status.label}
             </span>
           </div>
 
           {/* Condition Badge */}
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
             <span
-              className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-sm ${
+              className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full shadow-sm ${
                 motor.condition === "BARU"
                   ? "bg-blue-500 text-white"
                   : "bg-slate-600 text-white"
@@ -75,7 +75,7 @@ export function MotorCard({ motor }: MotorCardProps) {
         </div>
 
         {/* Content */}
-        <div className="p-4">
+        <div className="p-3 sm:p-4">
           {/* Brand */}
           <p className="text-[11px] font-semibold uppercase tracking-wider text-[#E8390E] mb-1">
             {motor.brand}
@@ -99,8 +99,8 @@ export function MotorCard({ motor }: MotorCardProps) {
           </div>
 
           {/* Price */}
-          <div className="mt-3 pt-3 border-t border-slate-100">
-            <p className="text-base font-extrabold text-[#0A1628]">
+          <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-slate-100">
+            <p className="text-sm sm:text-base font-extrabold text-[#0A1628]">
               {formatRupiah(motor.price)}
             </p>
           </div>

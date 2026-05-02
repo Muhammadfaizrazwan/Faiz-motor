@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Star, Send, LogIn } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Star, Send, LogIn, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
@@ -10,13 +10,25 @@ interface ReviewFormProps {
   onSubmit: (data: { rating: number; comment: string }) => Promise<boolean>;
   isLoggedIn: boolean;
   submitting: boolean;
+  initialData?: { rating: number; comment: string } | null;
+  onCancel?: () => void;
 }
 
-export function ReviewForm({ onSubmit, isLoggedIn, submitting }: ReviewFormProps) {
+export function ReviewForm({ onSubmit, isLoggedIn, submitting, initialData, onCancel }: ReviewFormProps) {
   const [rating, setRating] = useState(0);
   const [hoveredRating, setHoveredRating] = useState(0);
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState<{ rating?: string; comment?: string }>({});
+
+  useEffect(() => {
+    if (initialData) {
+      setRating(initialData.rating);
+      setComment(initialData.comment);
+    } else {
+      setRating(0);
+      setComment("");
+    }
+  }, [initialData]);
 
   if (!isLoggedIn) {
     return (
@@ -51,7 +63,7 @@ export function ReviewForm({ onSubmit, isLoggedIn, submitting }: ReviewFormProps
 
     setErrors({});
     const success = await onSubmit({ rating, comment });
-    if (success) {
+    if (success && !initialData) {
       setRating(0);
       setComment("");
     }
@@ -59,7 +71,16 @@ export function ReviewForm({ onSubmit, isLoggedIn, submitting }: ReviewFormProps
 
   return (
     <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm space-y-4">
-      <h4 className="text-sm font-semibold text-[#0A1628]">Tulis Ulasan</h4>
+      <div className="flex items-center justify-between">
+        <h4 className="text-sm font-semibold text-[#0A1628]">
+          {initialData ? "Edit Ulasan" : "Tulis Ulasan"}
+        </h4>
+        {initialData && onCancel && (
+          <Button variant="ghost" size="sm" onClick={onCancel} className="h-8 px-2 text-xs text-slate-500 hover:text-slate-800">
+            <X className="w-4 h-4 mr-1" /> Batal
+          </Button>
+        )}
+      </div>
 
       {/* Star Rating */}
       <div>
@@ -121,7 +142,7 @@ export function ReviewForm({ onSubmit, isLoggedIn, submitting }: ReviewFormProps
         size="sm"
       >
         <Send className="w-4 h-4" />
-        {submitting ? "Mengirim..." : "Kirim Ulasan"}
+        {submitting ? "Menyimpan..." : (initialData ? "Simpan Perubahan" : "Kirim Ulasan")}
       </Button>
     </div>
   );

@@ -91,9 +91,9 @@ function MotorListingContent() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-10">
       {/* Header */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1628]">Daftar Motor</h1>
         <p className="text-sm text-[#64748B] mt-1">Temukan motor yang sesuai kebutuhan Anda</p>
       </div>
@@ -107,7 +107,7 @@ function MotorListingContent() {
         {/* Main Content */}
         <div className="flex-1 min-w-0">
           {/* Toolbar */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <div className="relative flex-1 w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
               <Input
@@ -149,7 +149,7 @@ function MotorListingContent() {
 
           {/* Grid */}
           {loading ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div key={i} className="bg-white rounded-2xl overflow-hidden border border-slate-100">
                   <Skeleton className="aspect-[4/3]" />
@@ -163,7 +163,7 @@ function MotorListingContent() {
               ))}
             </div>
           ) : motors.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
               {motors
                 .filter((m) =>
                   searchQuery
@@ -180,7 +180,7 @@ function MotorListingContent() {
               title="Tidak Ada Motor Ditemukan"
               description="Coba ubah filter pencarian atau reset semua filter"
               actionLabel="Reset Filter"
-              actionHref="/motors"
+              onAction={resetFilters}
             />
           )}
 

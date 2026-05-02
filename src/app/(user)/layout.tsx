@@ -4,11 +4,11 @@ import { UserProviders } from "@/components/user/Providers";
 
 export const metadata = {
   title: {
-    default: "MotoMart — Marketplace Motor Terpercaya",
-    template: "%s | MotoMart",
+    default: "Faiz Motor — Marketplace Motor Terpercaya",
+    template: "%s | Faiz Motor",
   },
   description:
-    "Temukan motor impianmu di MotoMart. Marketplace motor baru dan bekas terpercaya dengan harga terbaik.",
+    "Temukan motor impianmu di Faiz Motor. Marketplace motor baru dan bekas terpercaya dengan harga terbaik.",
 };
 
 export default function UserLayout({

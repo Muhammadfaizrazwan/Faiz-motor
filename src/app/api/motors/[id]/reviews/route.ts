@@ -112,7 +112,7 @@ export async function POST(
         motorId: id,
         rating: parsed.data.rating,
         comment: parsed.data.comment,
-        status: "PENDING",
+        status: "APPROVED",
       },
       include: {
         user: {
@@ -123,7 +123,7 @@ export async function POST(
 
     return successResponse(
       review,
-      "Review submitted successfully. Pending approval.",
+      "Review submitted successfully.",
       201
     );
   } catch (error) {

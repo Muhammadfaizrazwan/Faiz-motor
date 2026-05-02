@@ -25,13 +25,13 @@ export function SearchBar() {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/10">
+    <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-xl shadow-slate-200/50">
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Brand Select */}
         <select
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
-          className="flex-1 h-11 px-4 rounded-xl bg-white/90 text-sm text-[#0A1628] border-0 focus:ring-2 focus:ring-[#E8390E] outline-none"
+          className="flex-1 h-11 px-4 rounded-xl bg-slate-50 text-sm text-[#0A1628] border border-slate-200 focus:ring-2 focus:ring-[#E8390E] focus:border-transparent outline-none"
         >
           <option value="">Semua Merek</option>
           {BRANDS.map((b) => (
@@ -45,7 +45,7 @@ export function SearchBar() {
         <select
           value={condition}
           onChange={(e) => setCondition(e.target.value)}
-          className="flex-1 h-11 px-4 rounded-xl bg-white/90 text-sm text-[#0A1628] border-0 focus:ring-2 focus:ring-[#E8390E] outline-none"
+          className="flex-1 h-11 px-4 rounded-xl bg-slate-50 text-sm text-[#0A1628] border border-slate-200 focus:ring-2 focus:ring-[#E8390E] focus:border-transparent outline-none"
         >
           {CONDITIONS.map((c) => (
             <option key={c.value} value={c.value}>

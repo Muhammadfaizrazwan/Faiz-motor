@@ -11,7 +11,7 @@ import {
   X,
   Home,
   Search,
-  ShoppingCart,
+  Heart,
   LogIn,
   LogOut,
   User,
@@ -21,8 +21,8 @@ import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
   { href: "/", label: "Beranda", icon: Home },
-  { href: "/motors", label: "Motor", icon: Search },
-  { href: "/saved", label: "Keranjang", icon: ShoppingCart },
+  { href: "/motors", label: "Motor", icon: Bike },
+  { href: "/saved", label: "Tersimpan", icon: Heart },
 ];
 
 export function Navbar() {
@@ -65,7 +65,7 @@ export function Navbar() {
                 <Bike className="w-5 h-5 text-white" />
               </div>
               <span className="text-lg font-bold text-[#0A1628] tracking-tight">
-                Moto<span className="text-[#E8390E]">Mart</span>
+                Faiz<span className="text-[#E8390E]"> Motor</span>
               </span>
             </Link>
 
